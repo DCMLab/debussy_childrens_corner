@@ -1,5 +1,5 @@
 ![Version](https://img.shields.io/github/v/release/DCMLab/debussy_childrens_corner?display_name=tag)
-![DOI](https://zenodo.org/badge/1.svg)](https://zenodo.org/badge/latestdoi/0001)
+[![DOI](https://zenodo.org/badge/563832001.svg)](https://zenodo.org/badge/latestdoi/563832001)
 ![GitHub repo size](https://img.shields.io/github/repo-size/DCMLab/debussy_childrens_corner)
 ![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-9cf)
 
