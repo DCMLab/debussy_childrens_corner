@@ -1,0 +1,53 @@
+Warnings encountered during the last execution of ms3 review (v1.2.8)
+=====================================================================
+
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 4
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 4
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 1
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 1
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 1
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 2
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 2
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 4
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 4
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 4
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5
+WARNING  ms3.Parse.debussy_childrens_corner.l113-04_childrens_snow
+	Event already contained a 'Fingering_text': 5

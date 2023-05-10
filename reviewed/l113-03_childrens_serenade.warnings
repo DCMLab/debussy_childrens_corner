@@ -1,0 +1,5 @@
+Warnings encountered during the last execution of ms3 review (v1.2.8)
+=====================================================================
+
+WARNING  ms3.Parse.debussy_childrens_corner.l113-03_childrens_serenade
+	Event already contained a 'Fingering_text': 3
