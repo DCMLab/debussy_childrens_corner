@@ -12,13 +12,16 @@ and serves as welcome page for both
 
 # Claude Debussy – Children’s Corner
 
+This dataset has been released together with the publication
+
+> Laneve, S., Schaerf, L., Cecchetti, G., Hentschel, J., & Rohrmeier, M. (in press). The diachronic development of Debussy’s musical style: A corpus study with Discrete Fourier Transform. Humanities and Social Sciences Communications.
 
 
 ## License
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)).
 
-# Overview
+## Overview
 |         file_name          |measures|labels|
 |----------------------------|-------:|-----:|
 |l113-01_childrens_doctor    |      76|     0|
@@ -29,4 +32,4 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License 
 |l113-06_childrens_golliwoggs|     128|     0|
 
 
-*Overview table updated using [ms3](https://johentsch.github.io/ms3/) 1.2.8.*
+*Overview table automatically updated using [ms3](https://johentsch.github.io/ms3/).*
