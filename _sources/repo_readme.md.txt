@@ -1,5 +1,5 @@
 ![Version](https://img.shields.io/github/v/release/DCMLab/debussy_childrens_corner?display_name=tag)
-![DOI](https://zenodo.org/badge/563832001.0.svg)](https://zenodo.org/badge/latestdoi/563832001.0)
+[![DOI](https://zenodo.org/badge/563832001.svg)](https://zenodo.org/badge/latestdoi/563832001)
 ![GitHub repo size](https://img.shields.io/github/repo-size/DCMLab/debussy_childrens_corner)
 ![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-9cf)
 
@@ -12,26 +12,24 @@ and serves as welcome page for both
 
 # Claude Debussy – Children’s Corner
 
+This dataset is part of the [The Claude Debussy Solo Piano Corpus](https://github.com/DCMLab/debussy_piano) which has been released together with the publication
+
+> Laneve, S., Schaerf, L., Cecchetti, G., Hentschel, J., & Rohrmeier, M. (in press). The diachronic development of Debussy’s musical style: A corpus study with Discrete Fourier Transform. Humanities and Social Sciences Communications.
 
 
 ## License
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)).
 
-## Naming convention
-
-The file names listed in the [Overview](#overview) below refer to the following numbering of the sonatas from 1-32.
-For example, the four movements of sonata no. 1 are named `01-1`, `01-2`, `01-3`, and `01-4`.
-
-| Number                              | Opus (Name)                       |
-|-------------------------------------|-----------------------------------|
-| Piano Sonata No.1 in F minor        | Op.2 No.1                         |
-
 ## Overview
-|file_name|measures|labels|standard| annotators      | reviewers |
-|---------|-------:|-----:|--------|-----------------|-----------|
-|01-1     |     152|   241|2.3.0   | Annotator names | AN        |
+|         file_name          |measures|labels|
+|----------------------------|-------:|-----:|
+|l113-01_childrens_doctor    |      76|     0|
+|l113-02_childrens_jimbos    |      81|     0|
+|l113-03_childrens_serenade  |     124|     0|
+|l113-04_childrens_snow      |      74|     0|
+|l113-05_childrens_little    |      31|     0|
+|l113-06_childrens_golliwoggs|     128|     0|
 
 
-
-*Overview table updated using [ms3](https://johentsch.github.io/ms3/) 1.1.1.*
+*Overview table automatically updated using [ms3](https://johentsch.github.io/ms3/).*
