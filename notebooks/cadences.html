@@ -51,7 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/cadences';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Notes" href="notes_stats.html" />
+    <link rel="prev" title="Annotations" href="annotations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -266,7 +266,9 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes_stats.html">Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cadences</a></li>
 </ul>
 </div>
@@ -327,7 +329,12 @@ document.write(`
                   
   <section id="cadences">
 <h1>Cadences<a class="headerlink" href="#cadences" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show imports</span>
+<span class="expanded">Hide imports</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">Counter</span>
@@ -339,23 +346,46 @@ document.write(`
 <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
 <span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
 
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">STD_LAYOUT</span><span class="p">,</span> <span class="n">CADENCE_COLORS</span><span class="p">,</span> <span class="n">color_background</span><span class="p">,</span> <span class="n">value_count_df</span><span class="p">,</span> <span class="n">get_repo_name</span><span class="p">,</span> <span class="n">resolve_dir</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">STD_LAYOUT</span><span class="p">,</span> <span class="n">CADENCE_COLORS</span><span class="p">,</span> <span class="n">color_background</span><span class="p">,</span> <span class="n">value_count_df</span><span class="p">,</span> <span class="n">get_repo_name</span><span class="p">,</span> <span class="n">print_heading</span><span class="p">,</span> <span class="n">resolve_dir</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CORPUS_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CORPUS_PATH&#39;</span><span class="p">,</span> <span class="s2">&quot;~/dcml_corpora&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CORPUS_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;CORPUS_PATH&#39;</span><span class="p">,</span> <span class="s2">&quot;~/workflow_test_metarepo&quot;</span><span class="p">)</span>
+<span class="n">print_heading</span><span class="p">(</span><span class="s2">&quot;Notebook settings&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CORPUS_PATH: </span><span class="si">{</span><span class="n">CORPUS_PATH</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">CORPUS_PATH</span> <span class="o">=</span> <span class="n">resolve_dir</span><span class="p">(</span><span class="n">CORPUS_PATH</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Notebook settings
+-----------------
+
+CORPUS_PATH: &#39;/home/runner/work/workflow_deployment/workflow_deployment/DCML/debussy_childrens_corner&#39;
+</pre></div>
 </div>
-<div class="cell docutils container">
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">repo</span> <span class="o">=</span> <span class="n">Repo</span><span class="p">(</span><span class="n">CORPUS_PATH</span><span class="p">)</span>
 <span class="n">notebook_repo</span> <span class="o">=</span> <span class="n">Repo</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">search_parent_directories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">print_heading</span><span class="p">(</span><span class="s2">&quot;Data and software versions&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Notebook repository &#39;</span><span class="si">{</span><span class="n">get_repo_name</span><span class="p">(</span><span class="n">notebook_repo</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; @ </span><span class="si">{</span><span class="n">notebook_repo</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span><span class="o">.</span><span class="n">hexsha</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data repo &#39;</span><span class="si">{</span><span class="n">get_repo_name</span><span class="p">(</span><span class="n">CORPUS_PATH</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; @ </span><span class="si">{</span><span class="n">repo</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span><span class="o">.</span><span class="n">hexsha</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dimcat version </span><span class="si">{</span><span class="n">dc</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -363,38 +393,113 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Notebook repository &#39;data_reports&#39; @ ec5e964
-Data repo &#39;debussy_childrens_corner&#39; @ 099ffa1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data and software versions
+--------------------------
+
+Notebook repository &#39;data_reports&#39; @ 007ea69
+Data repo &#39;debussy_childrens_corner&#39; @ c95d6f1
 dimcat version 0.3.0
 ms3 version 1.1.2
 </pre></div>
 </div>
 </div>
 </div>
-<section id="data-loading">
-<h2>Data loading<a class="headerlink" href="#data-loading" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
-<span class="n">dataset</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">CORPUS_PATH</span><span class="p">)</span>
-<span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">CORPUS_PATH</span><span class="p">,</span> <span class="n">parse_tsv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[<span class=" -Color -Color-Bold">default</span>|all]
-All corpora
------------
-View: This view is called &#39;default&#39;. It 
-	- excludes fnames that are not contained in the metadata,
-	- filters out file extensions requiring conversion (such as .xml), and
-	- excludes review files and folders.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pass at least one of (&#39;scores&#39;, &#39;measures&#39;, &#39;notes&#39;, &#39;rests&#39;, &#39;notes_and_rests&#39;, &#39;labels&#39;, &#39;expanded&#39;, &#39;form_labels&#39;, &#39;cadences&#39;, &#39;events&#39;, &#39;chords&#39;, &#39;unknown&#39;).
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">annotated_view</span><span class="o">.</span><span class="n">fnames_with_incomplete_facets</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_view</span><span class="p">(</span><span class="n">annotated_view</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">parse_tsv</span><span class="p">(</span><span class="n">choose</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_indices</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
 
-                              has   active   scores measures           notes       
-                         metadata     view detected detected parsed detected parsed
-corpus                                                                             
-debussy_childrens_corner      yes  default        6        6      6        6      6
+<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/parse.py:1654,</span> in <span class="ni">Parse.parse_tsv</span><span class="nt">(self, view_name, level, cols, infer_types, only_new, choose, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1652</span>     <span class="bp">self</span><span class="o">.</span><span class="n">change_logger_cfg</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1653</span> <span class="k">for</span> <span class="n">corpus_name</span><span class="p">,</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_corpora</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1654</span>     <span class="n">corpus</span><span class="o">.</span><span class="n">parse_tsv</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1655</span>                      <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1656</span>                      <span class="n">infer_types</span><span class="o">=</span><span class="n">infer_types</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1657</span>                      <span class="n">only_new</span><span class="o">=</span><span class="n">only_new</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1658</span>                      <span class="n">choose</span><span class="o">=</span><span class="n">choose</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:1597,</span> in <span class="ni">Corpus.parse_tsv</span><span class="nt">(self, view_name, cols, infer_types, level, only_new, choose, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1595</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1596</span>     <span class="bp">self</span><span class="o">.</span><span class="n">change_logger_cfg</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1597</span> <span class="n">fname2files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="s1">&#39;tsv&#39;</span><span class="p">,</span> <span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span> <span class="n">parsed</span><span class="o">=</span><span class="ow">not</span> <span class="n">only_new</span><span class="p">,</span> <span class="n">choose</span><span class="o">=</span><span class="n">choose</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1598</span> <span class="n">selected_files</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fname2files</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="p">[])</span>
+<span class="g g-Whitespace">   </span><span class="mi">1599</span> <span class="n">target</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_files</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:990,</span> in <span class="ni">Corpus.get_files</span><span class="nt">(self, facets, view_name, parsed, unparsed, choose, flat, include_empty)</span>
+<span class="g g-Whitespace">    </span><span class="mi">988</span>     <span class="n">choose</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">989</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">--&gt; </span><span class="mi">990</span> <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_pieces</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">991</span>     <span class="n">facet2files</span> <span class="o">=</span> <span class="n">piece</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="n">facets</span><span class="o">=</span><span class="n">facets</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">992</span>                                 <span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">993</span>                                 <span class="n">parsed</span><span class="o">=</span><span class="n">parsed</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">996</span>                                 <span class="n">flat</span><span class="o">=</span><span class="n">flat</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">997</span>                                 <span class="n">include_empty</span><span class="o">=</span><span class="n">include_empty</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">998</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">include_empty</span><span class="p">:</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:1291,</span> in <span class="ni">Corpus.iter_pieces</span><span class="nt">(self, view_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1289</span> <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">view</span><span class="o">.</span><span class="n">filter_by_token</span><span class="p">(</span><span class="s1">&#39;fnames&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1290</span>     <span class="n">metadata_check</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">differentiate_by_presence_in_metadata</span> <span class="ow">or</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">selected_fnames</span>
+<span class="ne">-&gt; </span><span class="mi">1291</span>     <span class="n">facet_check</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">filter_incomplete_facets</span> <span class="ow">or</span> <span class="n">piece</span><span class="o">.</span><span class="n">all_facets_present</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1292</span>                                                                            <span class="n">selected_facets</span><span class="o">=</span><span class="n">selected_facets</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1293</span>     <span class="k">if</span> <span class="n">metadata_check</span> <span class="ow">and</span> <span class="n">facet_check</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1294</span>         <span class="k">if</span> <span class="n">view_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">piece</span><span class="o">.</span><span class="n">_views</span><span class="p">:</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/piece.py:98,</span> in <span class="ni">Piece.all_facets_present</span><span class="nt">(self, view_name, selected_facets)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="n">facets</span> <span class="o">=</span> <span class="n">resolve_facets_param</span><span class="p">(</span><span class="n">selected_facets</span><span class="p">,</span> <span class="n">none_means_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">98</span>     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">facets</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">view_facets</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>         <span class="n">plural</span> <span class="o">=</span> <span class="s1">&#39;s are&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39; is&#39;</span>
+
+<span class="ne">TypeError</span>: &#39;NoneType&#39; object is not iterable
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_metadata</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metadata</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No pieces selected for analysis.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Concatenated &#39;metadata.tsv&#39; files cover </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span><span class="si">}</span><span class="s2"> of the </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">count_pieces</span><span class="p">()</span><span class="si">}</span><span class="s2"> scores.&quot;</span><span class="p">)</span>
+<span class="n">all_metadata</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="all-annotation-labels-from-the-selected-pieces">
+<h2>All annotation labels from the selected pieces<a class="headerlink" href="#all-annotation-labels-from-the-selected-pieces" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_labels</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_facet</span><span class="p">(</span><span class="s1">&#39;expanded&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_labels</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="si">}</span><span class="s2"> hand-annotated harmony labels:&quot;</span><span class="p">)</span>
+<span class="n">all_labels</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">color_background</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;chord&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -404,18 +509,8 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hascadence</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">HasCadenceAnnotationsFilter</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="k">assert</span> <span class="p">()</span> <span class="ow">in</span> <span class="n">hascadence</span><span class="o">.</span><span class="n">indices</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">hascadence</span><span class="o">.</span><span class="n">indices</span><span class="p">[()])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No cadences found.&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">indices</span><span class="p">[()])</span><span class="si">}</span><span class="s2"> pieces; after removing those without cadence labels: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hascadence</span><span class="o">.</span><span class="n">indices</span><span class="p">[()])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">hascadence</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">HasCadenceAnnotationsFilter</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">indices</span><span class="p">[()])</span><span class="si">}</span><span class="s2"> pieces; after removing those without cadence labels: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hascadence</span><span class="o">.</span><span class="n">indices</span><span class="p">[()])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: ()
 </pre></div>
 </div>
 </div>
@@ -425,30 +520,30 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 <h3>Show corpora containing pieces with cadence annotations<a class="headerlink" href="#show-corpora-containing-pieces-with-cadence-annotations" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_by_dataset</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">CorpusGrouper</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">hascadence</span><span class="p">)</span>
-<span class="n">corpora</span> <span class="o">=</span> <span class="p">{</span><span class="n">group</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ixs</span><span class="p">)</span><span class="si">}</span><span class="s2"> pieces&quot;</span> <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ixs</span> <span class="ow">in</span>  <span class="n">grouped_by_dataset</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">corpora</span><span class="p">)</span><span class="si">}</span><span class="s2"> corpora with </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span><span class="w"> </span><span class="n">grouped_by_dataset</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="si">}</span><span class="s2"> pieces containing cadence annotations:&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_by_corpus</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">CorpusGrouper</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">hascadence</span><span class="p">)</span>
+<span class="n">corpora</span> <span class="o">=</span> <span class="p">{</span><span class="n">group</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ixs</span><span class="p">)</span><span class="si">}</span><span class="s2"> pieces&quot;</span> <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ixs</span> <span class="ow">in</span>  <span class="n">grouped_by_corpus</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">corpora</span><span class="p">)</span><span class="si">}</span><span class="s2"> corpora with </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span><span class="w"> </span><span class="n">grouped_by_corpus</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="si">}</span><span class="s2"> pieces containing cadence annotations:&quot;</span><span class="p">)</span>
 <span class="n">corpora</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="all-annotation-labels-from-the-selected-pieces">
-<h3>All annotation labels from the selected pieces<a class="headerlink" href="#all-annotation-labels-from-the-selected-pieces" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h3>All annotation labels from the selected pieces<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_labels</span> <span class="o">=</span> <span class="n">hascadence</span><span class="o">.</span><span class="n">get_facet</span><span class="p">(</span><span class="s1">&#39;expanded&#39;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_labels</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="si">}</span><span class="s2"> hand-annotated harmony labels:&quot;</span><span class="p">)</span>
-<span class="n">all_labels</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">:]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">color_background</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;chord&quot;</span><span class="p">)</span>
+<span class="n">all_labels</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">:]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">color_background</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;chord&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="metadata">
-<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h3>
+<section id="id2">
+<h3>Metadata<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset_metadata</span> <span class="o">=</span> <span class="n">hascadence</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metadata</span><span class="p">()</span>
@@ -530,7 +625,7 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 <h3>Number of cadences per phrase<a class="headerlink" href="#number-of-cadences-per-phrase" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">segmented</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">PhraseSlicer</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">grouped_by_dataset</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">segmented</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">PhraseSlicer</span><span class="p">()</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">grouped_by_corpus</span><span class="p">)</span>
 <span class="n">phrases</span> <span class="o">=</span> <span class="n">segmented</span><span class="o">.</span><span class="n">get_slice_info</span><span class="p">()</span>
 <span class="n">phrase_segments</span> <span class="o">=</span> <span class="n">segmented</span><span class="o">.</span><span class="n">get_facet</span><span class="p">(</span><span class="s2">&quot;expanded&quot;</span><span class="p">)</span>
 <span class="n">phrase_gpb</span> <span class="o">=</span> <span class="n">phrase_segments</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
@@ -704,16 +799,10 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 <h3>PACs with ultima I/i<a class="headerlink" href="#pacs-with-ultima-i-i" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pac_on_i = phrase_segments.groupby(level=[0,1,2], group_keys=False).apply(lambda df: df if ((df.cadence == &#39;PAC&#39;) &amp; (df.numeral.isin((&#39;I&#39;, &#39;i&#39;)))).any() else None)</span>
-<span class="c1">#pac_on_i.cadence.value_counts()</span>
-<span class="c1">#pac_on_i.droplevel(-1).index.nunique()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_progressions</span><span class="p">(</span><span class="n">selected</span><span class="o">=</span><span class="s1">&#39;PAC&#39;</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=</span><span class="p">{},</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;chord&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_series</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">remove_immediate_duplicates</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">)</span> <span class="o">+</span> <span class="n">l</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_progressions</span><span class="p">(</span><span class="n">selected</span><span class="o">=</span><span class="s1">&#39;PAC&#39;</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=</span><span class="p">{},</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;chord&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_series</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses the nonlocal variable phrase_segments.&quot;&quot;&quot;</span>
     <span class="n">last_row</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">v</span><span class="p">,)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">last_row</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">progressions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -733,9 +822,12 @@ debussy_childrens_corner      yes  default        6        6      6        6    
                     <span class="k">continue</span>
                 <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">last_r</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">for</span> <span class="n">feat</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">last_row</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
                     <span class="k">continue</span>
-                <span class="n">progressions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">cadence</span><span class="p">[</span><span class="n">feature</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="n">remove_duplicates</span><span class="p">:</span>
+                    <span class="n">progressions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remove_immediate_duplicates</span><span class="p">(</span><span class="n">cadence</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">progressions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">cadence</span><span class="p">[</span><span class="n">feature</span><span class="p">]))</span>
     <span class="k">if</span> <span class="n">as_series</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">progressions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">progressions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">progressions</span>
 </pre></div>
 </div>
@@ -760,10 +852,7 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">remove_immediate_duplicates</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">)</span> <span class="o">+</span> <span class="n">l</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">)</span>
-
-<span class="n">numeral_prog_no_dups</span> <span class="o">=</span> <span class="n">numeral_progressions</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">remove_immediate_duplicates</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeral_prog_no_dups</span> <span class="o">=</span> <span class="n">numeral_progressions</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">remove_immediate_duplicates</span><span class="p">)</span>
 <span class="n">value_count_df</span><span class="p">(</span><span class="n">numeral_prog_no_dups</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -850,20 +939,22 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 <span class="k">def</span> <span class="nf">plot_progressions</span><span class="p">(</span><span class="n">progressions</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">stage_nodes</span><span class="p">,</span> <span class="n">edge_weights</span> <span class="o">=</span> <span class="n">progressions2graph_data</span><span class="p">(</span><span class="n">progressions</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="n">cut_at_stage</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">graph_data2sankey</span><span class="p">(</span><span class="n">stage_nodes</span><span class="p">,</span> <span class="n">edge_weights</span><span class="p">)</span>
-
-<span class="n">plot_progressions</span><span class="p">(</span><span class="n">numeral_prog_no_dups</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="chordal-roots-for-the-3-last-stages">
+<h4>Chordal roots for the 3 last stages<a class="headerlink" href="#chordal-roots-for-the-3-last-stages" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chord_progressions_minor</span> <span class="o">=</span> <span class="n">get_progressions</span><span class="p">(</span><span class="s1">&#39;PAC&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">numeral</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">localkey_is_minor</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="s1">&#39;root&#39;</span><span class="p">)</span>
-<span class="n">chord_progressions_minor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_progressions</span><span class="p">(</span><span class="n">numeral_prog_no_dups</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="complete-chords-for-the-last-four-stages-in-major">
+<h4>Complete chords for the last four stages in major<a class="headerlink" href="#complete-chords-for-the-last-four-stages-in-major" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pac_major</span> <span class="o">=</span> <span class="n">get_progressions</span><span class="p">(</span><span class="s1">&#39;PAC&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">numeral</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">localkey_is_minor</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="s1">&#39;chord&#39;</span><span class="p">)</span>
@@ -872,21 +963,9 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deceptive</span> <span class="o">=</span> <span class="n">get_progressions</span><span class="p">(</span><span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">localkey_is_minor</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="s1">&#39;chord&#39;</span><span class="p">)</span>
-<span class="n">deceptive</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_progressions</span><span class="p">(</span><span class="n">deceptive</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="bass-degrees-for-the-last-6-stages">
+<h4>Bass degrees for the last 6 stages.<a class="headerlink" href="#bass-degrees-for-the-last-6-stages" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_progressions</span><span class="p">(</span><span class="n">bass_prog_no_dups</span><span class="p">,</span> <span class="n">cut_at_stage</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
@@ -894,6 +973,9 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 </div>
 </div>
 </div>
+</section>
+<section id="bass-degrees-without-accidentals">
+<h4>Bass degrees without accidentals<a class="headerlink" href="#bass-degrees-without-accidentals" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">remove_sd_accidentals</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
@@ -905,6 +987,7 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="hcs-ending-on-v">
 <h3>HCs ending on V<a class="headerlink" href="#hcs-ending-on-v" title="Permalink to this heading">#</a></h3>
@@ -933,12 +1016,12 @@ debussy_childrens_corner      yes  default        6        6      6        6    
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notes_stats.html"
+       href="annotations.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notes</p>
+        <p class="prev-next-title">Annotations</p>
       </div>
     </a>
 </div></div>
@@ -959,11 +1042,12 @@ debussy_childrens_corner      yes  default        6        6      6        6    
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data loading</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-annotation-labels-from-the-selected-pieces">All annotation labels from the selected pieces</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-out-pieces-without-cadence-annotations">Filtering out pieces without cadence annotations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-corpora-containing-pieces-with-cadence-annotations">Show corpora containing pieces with cadence annotations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#all-annotation-labels-from-the-selected-pieces">All annotation labels from the selected pieces</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">All annotation labels from the selected pieces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Metadata</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overall">Overall</a></li>
@@ -981,7 +1065,13 @@ debussy_childrens_corner      yes  default        6        6      6        6    
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chord-progressions">Chord progressions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacs-with-ultima-i-i">PACs with ultima I/i</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacs-ending-on-scale-degree-1">PACs ending on scale degree 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacs-ending-on-scale-degree-1">PACs ending on scale degree 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chordal-roots-for-the-3-last-stages">Chordal roots for the 3 last stages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-chords-for-the-last-four-stages-in-major">Complete chords for the last four stages in major</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bass-degrees-for-the-last-6-stages">Bass degrees for the last 6 stages.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bass-degrees-without-accidentals">Bass degrees without accidentals</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hcs-ending-on-v">HCs ending on V</a></li>
 </ul>
 </li>
