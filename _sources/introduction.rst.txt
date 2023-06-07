@@ -30,10 +30,10 @@ Data Formats
 
 Each piece in this corpus is represented by four files with identical names, each in its own folder. For example, the first piece, *Doctor Gradus ad Parnassum*, has the following files:
 
--  ``test_example/MS3/l113-01_childrens_doctor.mscx``: Uncompressed MuseScore file including the music and annotation labels.
--  ``test_example/notes/l113-01_childrens_doctor.tsv``: A table of all note heads contained in the score and their relevant features (not each of them represents an onset, some are tied together)
--  ``test_example/measures/l113-01_childrens_doctor.tsv``: A table with relevant information about the measures in the score.
--  ``test_example/harmonies/l113-01_childrens_doctor.tsv``: A list of the included harmony labels (including cadences and phrases) with their positions in the score.
+-  ``MS3/l113-01_childrens_doctor.mscx``: Uncompressed MuseScore file including the music and annotation labels.
+-  ``notes/l113-01_childrens_doctor.tsv``: A table of all note heads contained in the score and their relevant features (not each of them represents an onset, some are tied together)
+-  ``measures/l113-01_childrens_doctor.tsv``: A table with relevant information about the measures in the score.
+-  ``harmonies/l113-01_childrens_doctor.tsv``: A list of the included harmony labels (including cadences and phrases) with their positions in the score.
 
 Opening Scores
 --------------
@@ -54,8 +54,8 @@ Since the TSV files contain null values, lists, fractions, and numbers that are 
 
    import ms3
 
-   labels = ms3.load_tsv('test_example/harmonies/l113-01_childrens_doctor.tsv')
-   notes = ms3.load_tsv('test_example/notes/l113-01_childrens_doctor.tsv')
+   labels = ms3.load_tsv('harmonies/l113-01_childrens_doctor.tsv')
+   notes = ms3.load_tsv('notes/l113-01_childrens_doctor.tsv')
 
 How to read ``metadata.tsv``
 ============================
