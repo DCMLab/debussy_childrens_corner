@@ -401,7 +401,7 @@ CORPUS_PATH: &#39;/home/runner/work/workflow_deployment/workflow_deployment/DCML
 Notebook repository &#39;data_reports&#39; @ 007ea69
 Data repo &#39;debussy_childrens_corner&#39; @ c95d6f1
 dimcat version 0.3.0
-ms3 version 1.1.2
+ms3 version 1.2.5
 </pre></div>
 </div>
 </div>
@@ -416,68 +416,32 @@ ms3 version 1.1.2
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pass at least one of (&#39;scores&#39;, &#39;measures&#39;, &#39;notes&#39;, &#39;rests&#39;, &#39;notes_and_rests&#39;, &#39;labels&#39;, &#39;expanded&#39;, &#39;form_labels&#39;, &#39;cadences&#39;, &#39;events&#39;, &#39;chords&#39;, &#39;unknown&#39;).
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">annotated_view</span><span class="o">.</span><span class="n">fnames_with_incomplete_facets</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_view</span><span class="p">(</span><span class="n">annotated_view</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">parse_tsv</span><span class="p">(</span><span class="n">choose</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_indices</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[<span class=" -Color -Color-Bold">annotated</span>|all|default]
+All corpora
+-----------
+View: This view is called &#39;annotated&#39;. It 
+	- excludes fnames that are not contained in the metadata,
+	- excludes pieces that do not have at least one file per selected facet,
+	- filters out file extensions requiring conversion (such as .xml),
+	- excludes review files and folders, and
+	- includes only facets containing &#39;expanded&#39;.
 
-<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/parse.py:1654,</span> in <span class="ni">Parse.parse_tsv</span><span class="nt">(self, view_name, level, cols, infer_types, only_new, choose, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1652</span>     <span class="bp">self</span><span class="o">.</span><span class="n">change_logger_cfg</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1653</span> <span class="k">for</span> <span class="n">corpus_name</span><span class="p">,</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_corpora</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1654</span>     <span class="n">corpus</span><span class="o">.</span><span class="n">parse_tsv</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1655</span>                      <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1656</span>                      <span class="n">infer_types</span><span class="o">=</span><span class="n">infer_types</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1657</span>                      <span class="n">only_new</span><span class="o">=</span><span class="n">only_new</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1658</span>                      <span class="n">choose</span><span class="o">=</span><span class="n">choose</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span>                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                              has     active
+                         metadata       view
+corpus                                      
+debussy_childrens_corner      yes  annotated
 
-<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:1597,</span> in <span class="ni">Corpus.parse_tsv</span><span class="nt">(self, view_name, cols, infer_types, level, only_new, choose, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1595</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1596</span>     <span class="bp">self</span><span class="o">.</span><span class="n">change_logger_cfg</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1597</span> <span class="n">fname2files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="s1">&#39;tsv&#39;</span><span class="p">,</span> <span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span> <span class="n">parsed</span><span class="o">=</span><span class="ow">not</span> <span class="n">only_new</span><span class="p">,</span> <span class="n">choose</span><span class="o">=</span><span class="n">choose</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1598</span> <span class="n">selected_files</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fname2files</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="p">[])</span>
-<span class="g g-Whitespace">   </span><span class="mi">1599</span> <span class="n">target</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_files</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:990,</span> in <span class="ni">Corpus.get_files</span><span class="nt">(self, facets, view_name, parsed, unparsed, choose, flat, include_empty)</span>
-<span class="g g-Whitespace">    </span><span class="mi">988</span>     <span class="n">choose</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">989</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="ne">--&gt; </span><span class="mi">990</span> <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_pieces</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">991</span>     <span class="n">facet2files</span> <span class="o">=</span> <span class="n">piece</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="n">facets</span><span class="o">=</span><span class="n">facets</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">992</span>                                 <span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">993</span>                                 <span class="n">parsed</span><span class="o">=</span><span class="n">parsed</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">996</span>                                 <span class="n">flat</span><span class="o">=</span><span class="n">flat</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">997</span>                                 <span class="n">include_empty</span><span class="o">=</span><span class="n">include_empty</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">998</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">include_empty</span><span class="p">:</span>
-
-<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/corpus.py:1291,</span> in <span class="ni">Corpus.iter_pieces</span><span class="nt">(self, view_name)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1289</span> <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">view</span><span class="o">.</span><span class="n">filter_by_token</span><span class="p">(</span><span class="s1">&#39;fnames&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1290</span>     <span class="n">metadata_check</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">differentiate_by_presence_in_metadata</span> <span class="ow">or</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">selected_fnames</span>
-<span class="ne">-&gt; </span><span class="mi">1291</span>     <span class="n">facet_check</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">filter_incomplete_facets</span> <span class="ow">or</span> <span class="n">piece</span><span class="o">.</span><span class="n">all_facets_present</span><span class="p">(</span><span class="n">view_name</span><span class="o">=</span><span class="n">view_name</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1292</span>                                                                            <span class="n">selected_facets</span><span class="o">=</span><span class="n">selected_facets</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1293</span>     <span class="k">if</span> <span class="n">metadata_check</span> <span class="ow">and</span> <span class="n">facet_check</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1294</span>         <span class="k">if</span> <span class="n">view_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">piece</span><span class="o">.</span><span class="n">_views</span><span class="p">:</span>
-
-<span class="nn">File ~/.local/lib/python3.10/site-packages/ms3/piece.py:98,</span> in <span class="ni">Piece.all_facets_present</span><span class="nt">(self, view_name, selected_facets)</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="n">facets</span> <span class="o">=</span> <span class="n">resolve_facets_param</span><span class="p">(</span><span class="n">selected_facets</span><span class="p">,</span> <span class="n">none_means_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">98</span>     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">facets</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">view_facets</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span>         <span class="n">plural</span> <span class="o">=</span> <span class="s1">&#39;s are&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39; is&#39;</span>
-
-<span class="ne">TypeError</span>: &#39;NoneType&#39; object is not iterable
+11/12 facets are excluded from this view.
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 0 annotated pieces, 0 parsed dataframes.
+</pre></div>
+</div>
+</div>
 </div>
 <section id="metadata">
 <h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h2>
@@ -487,6 +451,19 @@ ms3 version 1.1.2
 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No pieces selected for analysis.&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Concatenated &#39;metadata.tsv&#39; files cover </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span><span class="si">}</span><span class="s2"> of the </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">count_pieces</span><span class="p">()</span><span class="si">}</span><span class="s2"> scores.&quot;</span><span class="p">)</span>
 <span class="n">all_metadata</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">all_metadata</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metadata</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No pieces selected for analysis.&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Concatenated &#39;metadata.tsv&#39; files cover </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">)</span><span class="si">}</span><span class="s2"> of the </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">count_pieces</span><span class="p">()</span><span class="si">}</span><span class="s2"> scores.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">all_metadata</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">20</span><span class="p">]</span>
+
+<span class="ne">AssertionError</span>: No pieces selected for analysis.
 </pre></div>
 </div>
 </div>

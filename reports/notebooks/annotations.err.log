@@ -17,19 +17,25 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-print(f"N = {dataset.data.count_pieces()} annotated pieces, {dataset.data.count_parsed_tsvs()} parsed dataframes.")
+all_metadata = dataset.data.metadata()
+assert len(all_metadata) > 0, "No pieces selected for analysis."
+print(f"Metadata covers {len(all_metadata)} of the {dataset.data.count_pieces()} scores.")
+mean_composition_years = corpus_mean_composition_years(all_metadata)
+chronological_order = mean_composition_years.index.to_list()
+corpus_colors = dict(zip(chronological_order, CORPUS_COLOR_SCALE))
+corpus_names = {corp: get_corpus_display_name(corp) for corp in chronological_order}
+chronological_corpus_names = list(corpus_names.values())
+corpus_name_colors = {corpus_names[corp]: color for corp, color in corpus_colors.items()}
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mAttributeError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[6], line 1[0m
-[0;32m----> 1[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mN = [39m[38;5;132;01m{[39;00m[43mdataset[49m[38;5;241;43m.[39;49m[43mdata[49m[38;5;241;43m.[39;49m[43mcount_pieces[49m()[38;5;132;01m}[39;00m[38;5;124m annotated pieces, [39m[38;5;132;01m{[39;00mdataset[38;5;241m.[39mdata[38;5;241m.[39mcount_parsed_tsvs()[38;5;132;01m}[39;00m[38;5;124m parsed dataframes.[39m[38;5;124m"[39m)
+[0;31mAssertionError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[7], line 2[0m
+[1;32m      1[0m all_metadata [38;5;241m=[39m dataset[38;5;241m.[39mdata[38;5;241m.[39mmetadata()
+[0;32m----> 2[0m [38;5;28;01massert[39;00m [38;5;28mlen[39m(all_metadata) [38;5;241m>[39m [38;5;241m0[39m, [38;5;124m"[39m[38;5;124mNo pieces selected for analysis.[39m[38;5;124m"[39m
+[1;32m      3[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mMetadata covers [39m[38;5;132;01m{[39;00m[38;5;28mlen[39m(all_metadata)[38;5;132;01m}[39;00m[38;5;124m of the [39m[38;5;132;01m{[39;00mdataset[38;5;241m.[39mdata[38;5;241m.[39mcount_pieces()[38;5;132;01m}[39;00m[38;5;124m scores.[39m[38;5;124m"[39m)
+[1;32m      4[0m mean_composition_years [38;5;241m=[39m corpus_mean_composition_years(all_metadata)
 
-File [0;32m~/.local/lib/python3.10/site-packages/ms3/parse.py:1316[0m, in [0;36mParse.__getattr__[0;34m(self, view_name)[0m
-[1;32m   1314[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
-[1;32m   1315[0m [38;5;28;01melse[39;00m:
-[0;32m-> 1316[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00mview_name[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m is not an existing view. Use _.get_view([39m[38;5;124m'[39m[38;5;132;01m{[39;00mview_name[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m) to create it.[39m[38;5;124m"[39m)
-
-[0;31mAttributeError[0m: 'count_pieces' is not an existing view. Use _.get_view('count_pieces') to create it.
-AttributeError: 'count_pieces' is not an existing view. Use _.get_view('count_pieces') to create it.
+[0;31mAssertionError[0m: No pieces selected for analysis.
+AssertionError: No pieces selected for analysis.
 
