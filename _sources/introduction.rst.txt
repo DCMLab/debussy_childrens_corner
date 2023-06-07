@@ -16,7 +16,9 @@ Then you can clone this repository using the command
 
 .. code:: bash
 
+
    git clone https://github.com/DCMLab/debussy_childrens_corner.git
+
 
 Without full version history
 ----------------------------
@@ -172,7 +174,7 @@ By adding the flag ``-c`` to the review command, it will additionally compare th
 Questions, Suggestions, Corrections, Bug Reports
 ================================================
 
-For questions, remarks etc., please create an issue and feel free to fork and submit pull requests.
+For questions, remarks etc., please [create an issue](https://dcmlab.github.io/debussy_childrens_corner/issues) and feel free to fork and submit pull requests.
 
 License
 =======
